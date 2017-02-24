@@ -71,19 +71,29 @@ public class MainActivity extends AppCompatActivity {
                 //重置输入和验证码
                 et_pass.setText(null);
                 et_code.setText(null);
+
                 /***************************************************
                  * 此处刷新验证码有巨坑！！！会导致后面无法获取课表页面
                  * 抓包发现原因可能是获取验证码的请求又发了一遍
                  ***************************************************/
                 /*//刷新验证码
                 requestNetByThread(code);*/
+
             }
         });
+
+        /*********************
+         * 此处刷新也有坑
+         * 最后解决办法只能在message判断处进行刷新
+         **********************************/
+        /*//刷新验证码
+                requestNetByThread(code);*/
+
         //判断message
         judgemessage();
     }
 
-    //检查
+    //检查输入
     private void check() {
         // 获取用户名
         userName = et_name.getText().toString();
@@ -108,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //设置回到主界面
+    //设置回到主界面箭头
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
