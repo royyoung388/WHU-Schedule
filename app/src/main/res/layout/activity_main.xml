@@ -8,6 +8,21 @@
     android:orientation="vertical"
     android:background="#e6e6e6">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary">
+
+        <TextView
+            android:id="@+id/txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="20dp"
+            android:text="武大课表"/>
+    </android.support.v7.widget.Toolbar>
+
     <LinearLayout
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
@@ -120,6 +135,15 @@
             android:textSize="15dp"
             android:id="@+id/flash" />
     </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="记住密码"
+        android:checked="true"
+        android:textSize="20dp"/>
 
     <Button
         android:background="#ffb3b3"

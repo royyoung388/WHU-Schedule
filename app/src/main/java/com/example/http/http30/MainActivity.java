@@ -1,17 +1,22 @@
 package com.example.http.http30;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -33,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText et_name, et_pass, et_code;
     private Button bt_flash, bt_submit;
     private ImageView im_igm;
+    private CheckBox checkBox;
+    private SharedPreferences sp = null;
     final String code = "http://210.42.121.133/servlet/GenImg";//验证码
     final String loginurl =  "http://210.42.121.133/servlet/Login";//登录网站
     final int MESSAGE_SHOW_IMG = 1;
@@ -42,15 +49,17 @@ public class MainActivity extends AppCompatActivity {
     final int Link_noyzm = 5;
     final int Link_nouser = 6;
     private String userName, userPass, userCode,cookie;
-    private String csrf = null;
+    private String csrf, week, term = null;
     Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //设置返回箭头
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        /*//设置返回箭头
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
+        //设置Toolbar
+        setToolbar();
         //加载控件
         setcontrol();
         //子线程加载验证码
@@ -68,9 +77,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //检查之后登录
                 check();
-                //重置输入和验证码
-                et_pass.setText(null);
-                et_code.setText(null);
 
                 /***************************************************
                  * 此处刷新验证码有巨坑！！！会导致后面无法获取课表页面
@@ -93,22 +99,63 @@ public class MainActivity extends AppCompatActivity {
         judgemessage();
     }
 
+    //加载控件
+    private void setcontrol() {
+        et_name = (EditText) findViewById(R.id.name);
+        et_pass = (EditText) findViewById(R.id.password);
+        et_code = (EditText) findViewById(R.id.code);
+        bt_flash = (Button) findViewById(R.id.flash);
+        bt_submit = (Button) findViewById(R.id.submit);
+        im_igm = (ImageView) findViewById(R.id.img);
+        checkBox = (CheckBox) findViewById(R.id.checkbox);
+        sp = this.getSharedPreferences("login", Context.MODE_PRIVATE);
+        if (sp != null) {
+            et_name.setText(sp.getString("name",null));
+            et_pass.setText(sp.getString("pwd",null));
+        }
+    }
+
+    //设置Toolbar
+    private void setToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.Toolbar);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+    }
+
     //检查输入
     private void check() {
         // 获取用户名
         userName = et_name.getText().toString();
         // 获取用户密码
         userPass = et_pass.getText().toString();
+
         //获取验证码
         userCode = et_code.getText().toString();
         if (TextUtils.isEmpty(userName)) {
             Toast.makeText(this, "用户名不能为空", Toast.LENGTH_SHORT).show();
+            //重置输入和验证码
+            et_pass.setText(null);
+            et_code.setText(null);
         } else if (TextUtils.isEmpty(userPass)) {
             Toast.makeText(this, "密码不能为空", Toast.LENGTH_SHORT).show();
+            //重置输入和验证码
+            et_pass.setText(null);
+            et_code.setText(null);
         } else if (TextUtils.isEmpty(userCode)) {
             Toast.makeText(this, "验证码不能为空", Toast.LENGTH_SHORT).show();
+            //重置输入和验证码
+            et_pass.setText(null);
+            et_code.setText(null);
         } else {
             Toast.makeText(this, "正在连接", Toast.LENGTH_SHORT).show();
+            //加密
+            if (userPass.length() <= 8 ) {
+                userPass = MD5.getInstance().getMD5(et_pass.getText().toString());
+            }
+
+            //实现记住密码
+            rememer();
+
             new Thread() {
                 public void run() {
                     // 调用loginByGet方法登录
@@ -116,9 +163,31 @@ public class MainActivity extends AppCompatActivity {
                 };
             }.start();
         }
+
+
     }
 
-    //设置回到主界面箭头
+    //记住密码
+    private void rememer() {
+        sp = getSharedPreferences("login",MODE_PRIVATE);
+        if (checkBox.isChecked()) {
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putString("name",userName);
+            editor.putString("pwd",userPass);
+            editor.apply();
+            et_code.setText(null);
+        } else {
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putString("name",null);
+            editor.putString("pwd",null);
+            editor.apply();
+            //重置输入和验证码
+            et_pass.setText(null);
+            et_code.setText(null);
+        }
+    }
+
+    /*//设置回到主界面箭头
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -129,17 +198,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    //加载控件
-    private void setcontrol() {
-        et_name = (EditText) findViewById(R.id.name);
-        et_pass = (EditText) findViewById(R.id.password);
-        et_code = (EditText) findViewById(R.id.code);
-        bt_flash = (Button) findViewById(R.id.flash);
-        bt_submit = (Button) findViewById(R.id.submit);
-        im_igm = (ImageView) findViewById(R.id.img);
-    }
+    }*/
 
     //子线程加载验证码
     private void requestNetByThread(final String path) {
@@ -250,7 +309,7 @@ public class MainActivity extends AppCompatActivity {
             conn.setRequestProperty("Upgrade-Insecure-Requests","1");
             conn.connect();
 
-            String user = "id=" + URLEncoder.encode(name, "utf8") + "&pwd=" + URLEncoder.encode(MD5.getInstance().getMD5(password), "utf8") + "&xdvfb=" + URLEncoder.encode(code, "utf8");
+            String user = "id=" + URLEncoder.encode(name, "utf8") + "&pwd=" + URLEncoder.encode(password, "utf8") + "&xdvfb=" + URLEncoder.encode(code, "utf8");
             OutputStream os = conn.getOutputStream();
             os.write(user.getBytes("utf8"));
             os.flush();
@@ -277,11 +336,19 @@ public class MainActivity extends AppCompatActivity {
                     Analyse analyse = new Analyse("&csrftoken=(.*)','", html);
                     csrf = analyse.getGroup(0);
 
+                    Analyse analyse1 = new Analyse("<span\\s*id=\"showOrHide\">([^a-z]*)</span>"/*当前周*/,html);
+                    week = analyse1.getGroup(0);
+
+                    Analyse analyse2 = new Analyse("\"term\">\\s* ([^a-z]*)\\s* <span",html);
+                    term = analyse2.getGroup(0);
+
                     //获取课表页面
                     html = getPage();
 
                     Intent intent = new Intent(MainActivity.this,Login.class);
                     intent.putExtra("Html", html);
+                    intent.putExtra("Week", week);
+                    intent.putExtra("Term", term);
                     startActivity(intent);
 
                     //发送消息

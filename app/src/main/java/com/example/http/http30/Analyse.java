@@ -13,10 +13,8 @@ import java.util.regex.Pattern;
 public class Analyse {
 
     private String str1, str2;
-    private int position;
     private Matcher matcher;
     private Pattern pattern;
-    private List list = new ArrayList<Map<String, String>>();
 
     //分析与初始化
     public Analyse(String str1, String str2) {
@@ -34,10 +32,10 @@ public class Analyse {
     //获取所有的group
     public List<String> getGroup() {
         List<String> str = new ArrayList<>();
-        int i = 0;
+        //int i = 0;
         while(matcher.find()) {
             str.add(matcher.group(1));
-            i++;
+            //i++;
         }
         return str;
     }
@@ -45,10 +43,10 @@ public class Analyse {
     //获取指定的group
     public String getGroup(int index) {
         List<String> str = new ArrayList<>();
-        int i = 0;
+        //int i = 0;
         while(matcher.find()) {
             str.add(matcher.group(1));
-            i++;
+            //i++;
         }
         return str.get(index);
     }
