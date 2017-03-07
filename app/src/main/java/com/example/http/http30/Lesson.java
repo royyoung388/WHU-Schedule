@@ -10,10 +10,10 @@ import java.util.List;
 public class Lesson {
 
     //查找的内容
-    private String[] what = {"lessonName\\s*=\\s*\"(\\S*)\";//课程名", "teacherName\\s*=\\s*\"(\\S*)\"; //任课老师",
+    private String[] what = {"lessonName\\s*=\\s*\"(\\S*)\";//课程名", "teacherName\\s*=\\s*\"(\\S*)\";//任课老师",
             "detail\\s*=\\s*\"(\\S*)\";//课程的详细信息", "day\\s*=\\s*\"(\\d*)\";//"/*周几*/, "planType\\s*=\\s*\"(\\S*)\";"/*种类*/,
             "credit\\s*=\\s*\"(\\S*)\";//课程学分", "var\\sareaName\\s=\\s\"(\\S*)\";"/*大地点*/, "var\\sclassRoom\\s=\\s\"(\\S*)\";//教室",
-            "var\\s* beginTime\\s* =\\s* \"(\\w)\";//上课时间，从第几节课开始", "var\\s* endTime\\s* =\\s* \"(\\w)\";//上课时间，到第几节课结束"};
+            "var\\s*beginTime\\s*=\\s*\"(\\S*)\";//上课时间"/*从第几节课开始*/, "var\\s*endTime\\s*=\\s*\"(\\S*)\";//上课时间"/*到第几节课结束*/};
     private List<String> name, teacher, detail, day, type, credit, area, room, start, end;
     private String html;
 
