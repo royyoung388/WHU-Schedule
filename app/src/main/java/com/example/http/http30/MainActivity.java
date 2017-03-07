@@ -345,7 +345,7 @@ public class MainActivity extends AppCompatActivity {
                     //获取课表页面
                     html = getPage();
 
-                    Intent intent = new Intent(MainActivity.this,Login.class);
+                    Intent intent = new Intent(MainActivity.this,Login_item.class);
                     intent.putExtra("Html", html);
                     intent.putExtra("Week", week);
                     intent.putExtra("Term", term);

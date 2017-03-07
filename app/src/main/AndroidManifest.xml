@@ -17,10 +17,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Login"
+            android:name=".Login_item"
             android:label="@string/login"
             android:theme="@style/AppTheme">
         </activity>
+
+        <activity android:name=".Login_grid"></activity>
     </application>
 
 </manifest>

@@ -12,4 +12,30 @@
         <item name="android:windowBackground">@color/background</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <style name="top">
+        <item name="android:textSize">13dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="first_item">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">64dp</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="item">
+        <item name="android:textSize">18dp</item>
+        <!--<item name="android:padding">5dp</item>-->
+        <!--<item name="android:layout_width">m</item>-->
+        <!--<item name="android:layout_height">64dp</item>-->
+        <item name="android:gravity">center</item>
+    </style>
+
 </resources>
