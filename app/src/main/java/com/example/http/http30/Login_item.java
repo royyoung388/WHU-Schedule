@@ -32,7 +32,7 @@ public class Login_item extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+        setContentView(R.layout.item);
         /*//设置返回箭头
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
 

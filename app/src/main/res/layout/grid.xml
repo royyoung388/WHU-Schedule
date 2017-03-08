@@ -18,11 +18,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_gravity="center">
+                android:layout_centerInParent="true">
                 <TextView
-                    android:layout_gravity="center"
                     android:id="@+id/txt1_gird"
                     android:textSize="20dp"
+                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
@@ -148,8 +148,7 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="3dp">
+                android:orientation="vertical">
             </LinearLayout>
 
             <LinearLayout
@@ -157,8 +156,7 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="3dp">
+                android:orientation="vertical">
             </LinearLayout>
 
             <LinearLayout
@@ -166,8 +164,7 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="3dp">
+                android:orientation="vertical">
             </LinearLayout>
 
             <LinearLayout
@@ -175,8 +172,7 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="3dp">
+                android:orientation="vertical">
             </LinearLayout>
 
             <LinearLayout
@@ -184,8 +180,7 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="3dp">
+                android:orientation="vertical">
             </LinearLayout>
 
             <LinearLayout
@@ -193,8 +188,7 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="3dp">
+                android:orientation="vertical">
             </LinearLayout>
 
             <LinearLayout
@@ -202,8 +196,7 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="3dp">
+                android:orientation="vertical">
             </LinearLayout>
 
         </LinearLayout>
