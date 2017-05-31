@@ -40,7 +40,7 @@
                 android:layout_alignParentRight="true"
                 android:textSize="18dp"
                 android:text="周历模式"
-                android:background="#ffd9d9"/>
+                android:background="@color/colorPrimaryDark"/>
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
@@ -54,7 +54,5 @@
         android:id="@+id/recyclerview"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:dividerHeight="8dp"
-        android:divider="@color/divider"/>
+        android:layout_height="match_parent" />
 </LinearLayout>

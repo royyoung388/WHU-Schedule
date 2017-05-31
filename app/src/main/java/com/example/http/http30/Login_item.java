@@ -3,6 +3,7 @@ package com.example.http.http30;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -49,8 +50,7 @@ public class Login_item extends AppCompatActivity{
 
         //设置RecyclerView
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         mAdapter = new MyAdapter(mDataset);
         recyclerView.setAdapter(mAdapter);

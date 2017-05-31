@@ -126,7 +126,7 @@
             android:layout_height="50dp" />
 
         <Button
-            android:background="#ffb3b3"
+            android:background="@color/colorPrimary"
             android:padding="15dp"
             android:layout_margin="10dp"
             android:layout_width="wrap_content"
@@ -146,7 +146,7 @@
         android:textSize="20dp"/>
 
     <Button
-        android:background="#ffb3b3"
+        android:background="@color/colorPrimary"
         android:layout_margin="10dp"
         android:padding="10dp"
         android:id="@+id/submit"
